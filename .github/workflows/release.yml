@@ -93,6 +93,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          node-version: 16
       - run: yarn
       - run: yarn updater --token=${{ secrets.GITHUB_TOKEN }}
 
