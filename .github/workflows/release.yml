@@ -12,7 +12,7 @@ jobs:
       RELEASE_UPLOAD_ID: ${{ steps.create_release.outputs.id }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Query version number
         id: get_version
         shell: bash
@@ -26,7 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          node-version: 16
           tag_name: '${{ env.version }}'
           release_name: 'ChatGPT ${{ env.version }}'
           body: 'See the assets to download this version and install.'
@@ -93,9 +92,7 @@ jobs:
     needs: [create-release, build-tauri]
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          node-version: 16
+      - uses: actions/checkout@v3s
       - run: yarn
       - run: yarn updater --token=${{ secrets.GITHUB_TOKEN }}
 
